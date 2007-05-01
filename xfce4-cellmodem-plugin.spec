@@ -1,5 +1,5 @@
 Summary:	A cellmodem plugin for the Xfce panel
-Summary(pl.UTF-8):	Wtyczka cellmodem dla panelu Xfce
+Summary(pl):	Wtyczka cellmodem dla panelu Xfce
 Name:		xfce4-cellmodem-plugin
 Version:	0.0.5
 Release:	1
@@ -32,7 +32,7 @@ The current features include:
 - Asking for PIN if modem needs it
 - Quick visual feedback on modem and registration status via LEDs
 
-%description -l pl.UTF-8
+%description -l pl
 Wtyczka cellmodem to wtyczka monitoruj±ca dla modemów komórkowych.
 Informuje o dostawcy i jako¶ci sygna³u dla kart modemowych
 GPRS/UMTS(3G)/HSDPA(3.5G). Dzia³a z prawie ka¿d± kart± obs³uguj±c±
