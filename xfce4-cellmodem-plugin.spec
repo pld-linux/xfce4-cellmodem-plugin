@@ -33,19 +33,19 @@ The current features include:
 - Quick visual feedback on modem and registration status via LEDs
 
 %description -l pl.UTF-8
-Wtyczka cellmodem to wtyczka monitorujÄ…ca dla modemÃ³w komÃ³rkowych.
-Informuje o dostawcy i jakoÅ›ci sygnaÅ‚u dla kart modemowych
-GPRS/UMTS(3G)/HSDPA(3.5G). DziaÅ‚a z prawie kaÅ¼dÄ… kartÄ… obsÅ‚ugujÄ…cÄ…
-kanaÅ‚ out-of-band do celÃ³w monitoringu.
+Wtyczka cellmodem to wtyczka monitoruj±ca dla modemów komórkowych.
+Informuje o dostawcy i jako¶ci sygna³u dla kart modemowych
+GPRS/UMTS(3G)/HSDPA(3.5G). Dzia³a z prawie ka¿d± kart± obs³uguj±c±
+kana³ out-of-band do celów monitoringu.
 
-Aktualne moÅ¼liwoÅ›ci obejmujÄ…:
-- wyÅ›wietlanie aktualnego rodzaju sieci (GPRS/UMTS)
-- wyÅ›wietlanie aktualnego poziomu sygnaÅ‚u
-- konfiguracjÄ™ maksymalnego poziomu sygnaÅ‚u
-- konfiguracjÄ™ niskiego i krytycznego poziomu sygnaÅ‚u
-- pytanie o PIN jeÅ›li modem tego wymaga
-- szybkÄ… wizualnÄ… informacjÄ™ o stanie modemu i rejestracji za pomocÄ…
-  LED-Ã³w
+Aktualne mo¿liwo¶ci obejmuj±:
+- wy¶wietlanie aktualnego rodzaju sieci (GPRS/UMTS)
+- wy¶wietlanie aktualnego poziomu sygna³u
+- konfiguracjê maksymalnego poziomu sygna³u
+- konfiguracjê niskiego i krytycznego poziomu sygna³u
+- pytanie o PIN je¶li modem tego wymaga
+- szybk± wizualn± informacjê o stanie modemu i rejestracji za pomoc±
+  LED-ów
 
 %prep
 %setup -q
