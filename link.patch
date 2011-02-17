@@ -1,0 +1,51 @@
+Description: fix typo in Makefile.am preventing correct linking
+Author: Nick Schermer <nick@xfce.org>
+Applied-Upstream: 0.0.5, http://git.xfce.org/panel-plugins/xfce4-cellmodem-plugin/commit/?id=404093d6e2f22064166b806711d5cb5d9dd935d2
+diff -ur xfce4-cellmodem-plugin-0.0.5.orig/panel-plugin/Makefile.am xfce4-cellmodem-plugin-0.0.5/panel-plugin/Makefile.am
+--- xfce4-cellmodem-plugin-0.0.5.orig/panel-plugin/Makefile.am  2007-01-16 21:58:53.000000000 +0200
++++ xfce4-cellmodem-plugin-0.0.5/panel-plugin/Makefile.am       2007-02-27 22:55:19.000000000 +0200
+@@ -5,7 +5,7 @@
+         -DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
+ 	@LIBXFCE4PANEL_CFLAGS@
+ 
+-xfce4_cellmodem_plugin_LDFLAGS = \
++xfce4_cellmodem_plugin_LDADD = \
+ 	@LIBXFCE4PANEL_LIBS@ 
+ 
+ xfce4_cellmodem_plugin_SOURCES = \
+
+Description: add explicit linking to libxfcegui4
+Author: Yves-Alexis Perez <corsac@debian.org>
+Bug: http://bugzilla.xfce.org/show_bug.cgi?id=6952
+xfce4_cellmodem_plugin-pin_helper.o: In function `pin_helper_pin_entry_callback':
+pin_helper.c:(.text+0xa6): undefined reference to `xfce_warn'
+
+--- a/configure.ac
++++ b/configure.ac
+@@ -18,6 +18,8 @@
+ AC_CHECK_FUNCS([vasprintf])
+ 
+ XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.20])
++XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.20])
++
+ XDT_I18N([cs pt])
+ 
+ AC_ARG_ENABLE([debug],
+--- a/panel-plugin/Makefile.am
++++ b/panel-plugin/Makefile.am
+@@ -3,10 +3,12 @@
+ 
+ xfce4_cellmodem_plugin_CFLAGS = \
+         -DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
+-	@LIBXFCE4PANEL_CFLAGS@
++	@LIBXFCE4PANEL_CFLAGS@ \
++	@LIBXFCEGUI4_CFLAGS@
+ 
+ xfce4_cellmodem_plugin_LDADD = \
+-	@LIBXFCE4PANEL_LIBS@ 
++	@LIBXFCE4PANEL_LIBS@ \
++	@LIBXFCEGUI4_LIBS@
+ 
+ xfce4_cellmodem_plugin_SOURCES = \
+ 	cellmodem.c modem_driver.c \
+
