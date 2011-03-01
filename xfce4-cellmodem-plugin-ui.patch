@@ -1,0 +1,91 @@
+diff -ur xfce4-cellmodem-plugin-0.0.5-orig/configure.ac xfce4-cellmodem-plugin-0.0.5/configure.ac
+--- xfce4-cellmodem-plugin-0.0.5-orig/configure.ac	2011-03-01 11:20:17.671067640 +0100
++++ xfce4-cellmodem-plugin-0.0.5/configure.ac	2011-03-01 12:18:30.190889236 +0100
+@@ -18,7 +18,7 @@
+ AC_CHECK_FUNCS([vasprintf])
+ 
+ XDT_CHECK_PACKAGE([LIBXFCE4PANEL], [libxfce4panel-1.0], [4.3.20])
+-XDT_CHECK_PACKAGE([LIBXFCEGUI4], [libxfcegui4-1.0], [4.3.20])
++XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.8.0])
+ 
+ XDT_I18N([cs pt])
+ 
+diff -ur xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/cellmodem.h xfce4-cellmodem-plugin-0.0.5/panel-plugin/cellmodem.h
+--- xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/cellmodem.h	2006-10-30 20:27:24.000000000 +0100
++++ xfce4-cellmodem-plugin-0.0.5/panel-plugin/cellmodem.h	2011-03-01 12:18:30.191889236 +0100
+@@ -33,8 +33,8 @@
+ #include <gtk/gtk.h>
+ #include <glib.h>
+ #include <libxfce4util/libxfce4util.h>
+-#include <libxfcegui4/libxfcegui4.h>
+-#include <libxfce4panel/xfce-panel-plugin.h>
++#include <libxfce4ui/libxfce4ui.h>
++#include <libxfce4panel/libxfce4panel.h>
+ #include "leds.h"
+ 
+ #ifdef DEBUG_ENABLED
+diff -ur xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/Makefile.am xfce4-cellmodem-plugin-0.0.5/panel-plugin/Makefile.am
+--- xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/Makefile.am	2011-03-01 11:20:17.671067640 +0100
++++ xfce4-cellmodem-plugin-0.0.5/panel-plugin/Makefile.am	2011-03-01 12:18:30.194889236 +0100
+@@ -4,11 +4,11 @@
+ xfce4_cellmodem_plugin_CFLAGS = \
+         -DPACKAGE_LOCALE_DIR=\"$(localedir)\" \
+ 	@LIBXFCE4PANEL_CFLAGS@ \
+-	@LIBXFCEGUI4_CFLAGS@
++	@LIBXFCE4UI_CFLAGS@
+ 
+ xfce4_cellmodem_plugin_LDADD = \
+ 	@LIBXFCE4PANEL_LIBS@ \
+-	@LIBXFCEGUI4_LIBS@
++	@LIBXFCE4UI_LIBS@
+ 
+ xfce4_cellmodem_plugin_SOURCES = \
+ 	cellmodem.c modem_driver.c \
+diff -ur xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/pin_helper.c xfce4-cellmodem-plugin-0.0.5/panel-plugin/pin_helper.c
+--- xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/pin_helper.c	2006-10-05 13:47:16.000000000 +0200
++++ xfce4-cellmodem-plugin-0.0.5/panel-plugin/pin_helper.c	2011-03-01 12:19:26.308889237 +0100
+@@ -28,7 +28,7 @@
+ 	if (!pin || strlen(pin)!=4 )
+ 	{
+ 	    /* Error. */
+-	    xfce_warn(_("Invalid PIN entered. PIN has 4 digits"));
++	    xfce_dialog_show_warning(NULL, NULL, _("Invalid PIN entered. PIN has 4 digits"));
+ 
+             return;
+ 	}
+diff -ur xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/preferences.c xfce4-cellmodem-plugin-0.0.5/panel-plugin/preferences.c
+--- xfce4-cellmodem-plugin-0.0.5-orig/panel-plugin/preferences.c	2006-10-30 20:59:14.000000000 +0100
++++ xfce4-cellmodem-plugin-0.0.5/panel-plugin/preferences.c	2011-03-01 17:10:29.997567406 +0100
+@@ -254,7 +254,6 @@
+ cellmodem_create_options(XfcePanelPlugin *plugin, cellmodem_t *monitor)
+ {
+     GtkWidget *dlg;
+-    GtkWidget *header;
+     GtkWidget *vbox;
+ /*    GtkWidget *vbox2;*/
+     GtkSizeGroup *sizegr;
+@@ -269,7 +268,7 @@
+ 
+     xfce_panel_plugin_block_menu (plugin);
+     
+-    dlg = gtk_dialog_new_with_buttons (_("Configure Cell Modem Monitor"),
++    dlg = xfce_titled_dialog_new_with_buttons (_("Configure Cell Modem Monitor"),
+                 GTK_WINDOW (gtk_widget_get_toplevel (GTK_WIDGET (plugin))),
+                 GTK_DIALOG_DESTROY_WITH_PARENT |
+                 GTK_DIALOG_NO_SEPARATOR,
+@@ -280,14 +279,7 @@
+                       monitor);
+ 
+ 
+-    /* The header - this was most copied from other sources*/
+-
+-    header = xfce_create_header (NULL, _("Cellular Modem Monitor"));
+-    gtk_widget_set_size_request (GTK_BIN (header)->child, -1, 32);
+-    gtk_container_set_border_width (GTK_CONTAINER (header), BORDER - 2);
+-    gtk_widget_show (header);
+-    gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dlg)->vbox), header,
+-                        FALSE, TRUE, 0);
++    xfce_titled_dialog_set_subtitle (XFCE_TITLED_DIALOG(dlg), _("Cellular Modem Monitor"));
+ 
+     /* Our own Vbox, so we can have a border */
+ 
