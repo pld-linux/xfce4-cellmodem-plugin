@@ -2,7 +2,7 @@ Summary:	A cellmodem plugin for the Xfce panel
 Summary(pl.UTF-8):	Wtyczka cellmodem dla panelu Xfce
 Name:		xfce4-cellmodem-plugin
 Version:	0.0.5
-Release:	5
+Release:	6
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://goodies.xfce.org/releases/xfce4-cellmodem-plugin/%{name}-%{version}.tar.gz
